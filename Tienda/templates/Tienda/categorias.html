@@ -1,0 +1,25 @@
+{% extends 'Tienda/index.html' %}
+
+{% block titulo %}
+
+{% endblock titulo %}
+
+{% block contenido %}
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Categoria</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for c in categorias %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.categoria }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock contenido %}

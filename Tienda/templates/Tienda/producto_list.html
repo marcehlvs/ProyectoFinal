@@ -1,0 +1,67 @@
+{% extends "Tienda/index.html" %}
+
+{% block titulo %}
+     <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Lista de Productos</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Página de productos_list</p>
+                </div>
+            </div>
+        </header>
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <table>
+    <tr>
+        <td with="200"><h2>Productos List</h2></td>
+        <td>
+            <a href="{% url 'productoCreate' %}" class="btn btn-primary btn-sm">
+            <i class="fa fa-plus fa-lg" title="Crear"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>precio</th>
+            <th>categoria</th>
+            <th>imagen_url</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in producto_list %}
+        <tr>
+            <td> {{ p.id }}</td>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.descripcion }}</td>
+            <td>{{ p.precio }}</td>
+            <td>{{ p.categoria.nombre }}</td>
+            <td>{{ p.imagen_url }}</td>
+
+
+            <td>
+                <a
+                  href="{% url 'productoUpdate'  p.id %}"
+                  class="btn btn-primary"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+                </a>
+                <a
+                  href="{% url 'productoDelete' p.id %}"
+                  class="btn btn-danger"
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}
+
