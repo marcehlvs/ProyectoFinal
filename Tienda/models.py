@@ -7,6 +7,10 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nombre
+    class Meta:
+        verbose_name = 'Categoria'
+        verbose_name_plural = 'Categorias'
+        ordering = ["nombre"]
 
 class Producto(models.Model):
     nombre = models.CharField(max_length=100)
@@ -17,6 +21,11 @@ class Producto(models.Model):
 
     def __str__(self):
         return self.nombre
+    class Meta:
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
+        ordering = ["categoria", "nombre"]
+
 
 class Pedido(models.Model):
     productos = models.ManyToManyField(Producto)
@@ -24,3 +33,4 @@ class Pedido(models.Model):
 
     def __str__(self):
         return f"Pedido {self.id} - {self.fecha}"
+
