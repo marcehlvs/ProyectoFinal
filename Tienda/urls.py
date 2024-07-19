@@ -1,5 +1,6 @@
 from django.urls import path, include
 from Tienda.views import *
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', home, name='home'),
@@ -21,5 +22,10 @@ urlpatterns = [
     #___ pedidos
 
 
+    #___ login
 
+    path('login/', loginRequest, name='login'),
+
+    #___ logout con cbv
+    path('logout/', LogoutView.as_view(template_name="Tienda/logout.html"), name='logout'),
 ]

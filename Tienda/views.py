@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from Tienda.models import *
+
+#login
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import AuthenticationForm
 
 
 # Create your views here.
@@ -60,3 +64,20 @@ class CategoriaUpdate(UpdateView):
 class CategoriaDelete(DeleteView):
     model = Categoria
     success_url = reverse_lazy("categorias")
+
+
+#login-logout-registration
+
+def loginRequest(request):
+    if request.method == "POST":  # Ya llego la información.
+        usuario = request.POST["username"]
+        clave = request.POST["password"]
+        user = authenticate(username=usuario, password=clave)
+        if user is not None:
+            login(request, user)
+            return render(request, "Tienda/index.html")
+        else:
+            return redirect(reverse_lazy('login'))
+    else:
+        miForm = AuthenticationForm()  # Creo formulario vacio
+    return render(request, "Tienda/login.html", {"form": miForm})
