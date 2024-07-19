@@ -14,6 +14,20 @@ def home(request):
 
 class ProductoList(ListView):
     model = Producto
+    template_name = 'Tienda/producto_list.html'
+    context_object_name = 'productos'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        buscar = self.request.GET.get('buscar', None)
+        if buscar:
+            queryset = queryset.filter(nombre__icontains=buscar)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['buscar'] = self.request.GET.get('buscar', '')
+        return context
 
 class ProductoCreate(CreateView):
     model = Producto
