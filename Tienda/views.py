@@ -23,6 +23,13 @@ def home(request):
 
 #__ Producto
 
+#__ Importo para ver productos en el index
+class IndexView(ListView):
+    model = Producto
+    template_name = 'Tienda/index.html'
+    context_object_name = 'productos'
+
+
 class ProductoList(ListView):
     model = Producto
     template_name = 'Tienda/producto_list.html'
@@ -42,12 +49,12 @@ class ProductoList(ListView):
 
 class ProductoCreate(LoginRequiredMixin, CreateView):
     model = Producto
-    fields = ['nombre', 'descripcion', 'precio', 'categoria', 'imagen_url']
+    fields = ['nombre', 'descripcion', 'precio', 'cantidad', 'categoria', 'imagen_url']
     success_url = reverse_lazy("productos")
 
 class ProductoUpdate(LoginRequiredMixin, UpdateView):
     model = Producto
-    fields = ['nombre', 'descripcion', 'precio', 'categoria', 'imagen_url']
+    fields = ['nombre', 'descripcion', 'precio', 'cantidad', 'categoria', 'imagen_url']
     success_url = reverse_lazy("productos")
 
 
@@ -80,17 +87,17 @@ class CategoriaDelete(LoginRequiredMixin, DeleteView):
 #login-logout-registration
 
 def loginRequest(request):
-    if request.method == "POST":  # Ya llego la información.
+    if request.method == "POST":
         usuario = request.POST["username"]
         clave = request.POST["password"]
         user = authenticate(username=usuario, password=clave)
         if user is not None:
             login(request, user)
-            return render(request, "Tienda/index.html")
+            return redirect('home')  # Redirige a la vista 'home' que es IndexView
         else:
             return redirect(reverse_lazy('login'))
     else:
-        miForm = AuthenticationForm()  # Creo formulario vacio
+        miForm = AuthenticationForm()
     return render(request, "Tienda/login.html", {"form": miForm})
 
 
@@ -106,3 +113,4 @@ def register(request):
     else:
         miForm = RegistroForm()
     return render(request, "Tienda/registro.html", {"form": miForm})
+

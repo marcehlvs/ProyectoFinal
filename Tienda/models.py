@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Producto(models.Model):
     descripcion = models.TextField()
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=0)
     imagen_url = models.URLField(max_length=200)
 
     def __str__(self):
@@ -34,3 +36,11 @@ class Pedido(models.Model):
     def __str__(self):
         return f"Pedido {self.id} - {self.fecha}"
 
+#__ Avatar
+
+class Avatar(models.Model):
+    imagen = models.ImageField(upload_to="avatares")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} {self.imagen}"

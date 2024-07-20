@@ -3,7 +3,8 @@ from Tienda.views import *
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', IndexView.as_view(), name='home'),
+    #path('', home, name='home'),
 
     #___ productos
 
