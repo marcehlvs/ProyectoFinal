@@ -40,17 +40,18 @@ class ProductoList(ListView):
         context['buscar'] = self.request.GET.get('buscar', '')
         return context
 
-class ProductoCreate(CreateView):
+class ProductoCreate(LoginRequiredMixin, CreateView):
     model = Producto
     fields = ['nombre', 'descripcion', 'precio', 'categoria', 'imagen_url']
     success_url = reverse_lazy("productos")
 
-class ProductoUpdate(UpdateView):
+class ProductoUpdate(LoginRequiredMixin, UpdateView):
     model = Producto
     fields = ['nombre', 'descripcion', 'precio', 'categoria', 'imagen_url']
     success_url = reverse_lazy("productos")
 
-class ProductoDelete(DeleteView):
+
+class ProductoDelete(LoginRequiredMixin, DeleteView):
     model = Producto
     success_url = reverse_lazy("productos")
 
@@ -58,17 +59,20 @@ class ProductoDelete(DeleteView):
 
 class CategoriaList(ListView):
     model = Categoria
-class CategoriaCreate(CreateView):
+
+
+class CategoriaCreate(LoginRequiredMixin, CreateView):
     model = Categoria
     fields= ['nombre']
     success_url = reverse_lazy("categorias")
 
-class CategoriaUpdate(UpdateView):
+class CategoriaUpdate(LoginRequiredMixin, UpdateView):
     model = Categoria
     fields = ['nombre']
     success_url = reverse_lazy("categorias")
 
-class CategoriaDelete(DeleteView):
+
+class CategoriaDelete(LoginRequiredMixin, DeleteView):
     model = Categoria
     success_url = reverse_lazy("categorias")
 
