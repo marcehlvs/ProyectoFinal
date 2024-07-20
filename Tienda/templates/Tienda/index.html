@@ -44,7 +44,10 @@
             </form>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ms-lg-4" style="display: flex; justify-content: flex-end; width: 100%;">
                 {% if user.is_authenticated %}
-                <li>
+                <li style="margin-top: 10px;">
+                    <p style="color:green"> [{{user.username}}]</p>
+                </li>
+                <li style="margin-left: 10px;">
                     <form method="post" action="{% url 'logout' %}" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger me-2" style="background-color: #dc3545; border-color: #dc3545;">Logout</button>
@@ -52,15 +55,12 @@
                 </li>
                 {% else %}
                 <li><a class="btn btn-primary me-2" href="{% url 'login' %}" style="background-color: #007bff; border-color: #007bff;">Login</a></li>
-                <li><a class="btn btn-success" href="" style="background-color: #28a745; border-color: #28a745;">Registrate</a></li>
+                <li><a class="btn btn-success" href="{% url 'registro' %}" style="background-color: #28a745; border-color: #28a745;">Registrate</a></li>
                 {% endif %}
             </ul>
         </div>
     </div>
 </nav>
-
-
-
         <!-- Header-->
         {% block titulo %}
         <header class="bg-dark py-5">

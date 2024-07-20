@@ -1,0 +1,29 @@
+{% extends 'Tienda/index.html' %}
+
+
+{% block titulo %}
+     <header class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">¡Registrate!</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Pagina de registro</p>
+                </div>
+            </div>
+        </header>
+{% endblock titulo %}
+
+
+{% block contenido %}
+    <form action="" method="post">
+    {% csrf_token %}
+    <table class="table table-striped text-center">
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Registrarse" style="display: block; margin: 0 auto;">
+</form>
+    <br>
+
+
+
+{% endblock contenido %}
+

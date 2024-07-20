@@ -2,7 +2,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
+from .forms import *
 from Tienda.models import *
+
+#decorators and mixin
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 
 #login
 from django.contrib.auth import login, authenticate
@@ -81,3 +88,17 @@ def loginRequest(request):
     else:
         miForm = AuthenticationForm()  # Creo formulario vacio
     return render(request, "Tienda/login.html", {"form": miForm})
+
+
+#registrate
+
+def register(request):
+    if request.method == "POST":
+        miForm = RegistroForm(request.POST)
+        if miForm.is_valid():
+            usuario = miForm.cleaned_data.get('username')
+            miForm.save()
+            return redirect(reverse_lazy('home'))
+    else:
+        miForm = RegistroForm()
+    return render(request, "Tienda/registro.html", {"form": miForm})

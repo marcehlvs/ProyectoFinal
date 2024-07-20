@@ -28,4 +28,7 @@ urlpatterns = [
 
     #___ logout con cbv
     path('logout/', LogoutView.as_view(template_name="Tienda/logout.html"), name='logout'),
+
+    #__ registro
+    path('registro/', register, name='registro'),
 ]
