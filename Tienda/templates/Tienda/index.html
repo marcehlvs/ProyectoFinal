@@ -48,6 +48,13 @@
                     <p style="color:green">¡Hola [{{user.username}}]!</p>
                 </li>
                 <li>
+                    <div class="text-center">
+	                    <a href="{% url 'agregar_avatar' %}"><img src="{{ request.session.avatar }}" height="40px" weight="40px" alt="avatar">
+
+                        </a>
+                    </div>
+                </li>
+                <li>
                     <a class="btn btn-success" href="{% url 'perfil' %}" style="margin-left: 10px;">Perfil</a>
                 </li>
                 <li style="margin-left: 10px;">

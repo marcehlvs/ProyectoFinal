@@ -41,4 +41,7 @@ urlpatterns = [
 
     path('<int:pk>/password/', CambiarClave.as_view(), name="cambiarClave"),
 
+    #__agregarAvatar
+    path('agregar_avatar/', agregarAvatar, name='agregar_avatar'),
+
 ]

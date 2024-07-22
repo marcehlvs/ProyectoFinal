@@ -97,6 +97,17 @@ def loginRequest(request):
         user = authenticate(username=usuario, password=clave)
         if user is not None:
             login(request, user)
+
+            #__ buscarAvatar
+            try:
+                avatar = Avatar.objects.get(user=request.user.id).imagen.url
+            except:
+                avatar = "/media/avatares/default.png"
+            finally:
+                request.session['avatar'] = avatar
+            #_______________
+
+
             return redirect('home')  # Redirige a la vista 'home' que es IndexView
         else:
             return redirect(reverse_lazy('login'))
@@ -136,9 +147,35 @@ def editProfile(request):
         miForm = UserEditForm(instance=usuario)
     return render(request, "Tienda/editarPerfil.html", {"form": miForm})
 
-
 #__cambiarClave
 
 class CambiarClave(LoginRequiredMixin, PasswordChangeView):
 	template_name="Tienda/cambiar_clave.html"
 	success_url = reverse_lazy("home")
+
+#__Avatar
+
+@login_required
+def agregarAvatar(request):
+    if request.method == "POST":
+        miForm = AvatarForm(request.POST, request.FILES)
+        if miForm.is_valid():
+            usuario = User.objects.get(username=request.user)
+            imagen = miForm.cleaned_data["imagen"]
+            #___borrar avatar viejo
+            avatarViejo = Avatar.objects.filter(user=usuario)
+            if len(avatarViejo) > 0:
+                for i in range(len(avatarViejo)):
+                    avatarViejo[i].delete()
+            #___________________
+            avatar = Avatar(user=usuario, imagen=imagen)
+            avatar.save()
+
+            #___Envía la imagen al home
+            imagen = Avatar.objects.get(user=usuario).imagen.url
+            request.session["avatar"] = imagen
+            return redirect(reverse_lazy('home'))
+    else:
+        miForm = AvatarForm()
+    return render(request, "Tienda/agregarAvatar.html", {"form": miForm})
+
