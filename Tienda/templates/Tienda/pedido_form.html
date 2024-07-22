@@ -5,8 +5,8 @@
      <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                    <h1 class="display-4 fw-bolder">Contraseña</h1>
-                    <p class="lead fw-normal text-white-50 mb-0">Actualizá tu contraseña</p>
+                    <h1 class="display-4 fw-bolder">Alta Pedido</h1>
+                    <p class="lead fw-normal text-white-50 mb-0">Pagina de pedido_form</p>
                 </div>
             </div>
         </header>
@@ -14,12 +14,13 @@
 
 
 {% block contenido %}
-    <form action="" method="post" >
-        {% csrf_token %}
+    <form action="" method="post">
+    {% csrf_token %}
         <table class="table table-striped text-center">
+            <br>
             {{ form.as_table }}
         </table>
-        <input type="submit" value="Guardar" style="display: block; margin: 0 auto;">
-    </form>
+        <<input type="submit" value="Guardar" style="display: block; margin: 0 auto;">
     <br>
+    </form>
 {% endblock contenido %}

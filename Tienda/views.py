@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from .forms import *
 from Tienda.models import *
@@ -66,6 +66,11 @@ class ProductoDelete(LoginRequiredMixin, DeleteView):
     model = Producto
     success_url = reverse_lazy("productos")
 
+class ProductoDetail(DetailView):
+    model = Producto
+    template_name = 'Tienda/producto_detail.html'
+    context_object_name = 'producto'
+
 #__ Categoria
 
 class CategoriaList(ListView):
@@ -86,6 +91,28 @@ class CategoriaUpdate(LoginRequiredMixin, UpdateView):
 class CategoriaDelete(LoginRequiredMixin, DeleteView):
     model = Categoria
     success_url = reverse_lazy("categorias")
+
+
+#__ Pedidos
+
+class PedidoList(ListView):
+    model = Pedido
+    template_name = 'Tienda/pedidos_list'
+    context_object_name = 'pedidos'
+
+class PedidoCreate(LoginRequiredMixin, CreateView):
+    model = Pedido
+    fields = ['productos']
+    success_url = reverse_lazy("pedidos")
+
+class PedidoUpdate(LoginRequiredMixin, UpdateView):
+    model = Pedido
+    fields = ['productos']
+    success_url = reverse_lazy("pedidos")
+class PedidoDelete(LoginRequiredMixin, DeleteView):
+    model = Pedido
+    success_url = reverse_lazy("pedidos")
+
 
 
 #login-logout-registration

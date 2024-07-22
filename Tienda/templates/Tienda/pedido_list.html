@@ -1,0 +1,61 @@
+{% extends "Tienda/index.html" %}
+
+{% block titulo %}
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Pedidos</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Envío gratis con tu compra superior a $1</p>
+        </div>
+    </div>
+</header>
+{% endblock titulo %}
+
+{% block contenido %}
+    <br>
+<table>
+    <tr>
+        <td with="200"><h2>Pedidos realizados</h2></td>
+        <td>
+            <a href="{% url 'pedidoCreate' %}" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus fa-lg" title="Crear"></i>
+            </a>
+        </td>
+    </tr>
+</table>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Productos</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for pe in pedidos %}
+        <tr>
+            <td>{{ pe.id }}</td>
+            <td>
+                {% for producto in pe.productos.all %}
+                    {{ producto.nombre }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ pe.fecha }}</td>
+            <td>
+                <a href="{% url 'pedidoUpdate' pe.id %}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-edit fa-sm" title="Editar"></i>
+                </a>
+                <a href="{% url 'pedidoDelete' pe.id %}" class="btn btn-danger btn-sm">
+                    <i class="fa fa-trash fa-sm" title="Eliminar"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}
+
+
+

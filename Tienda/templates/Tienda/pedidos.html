@@ -1,0 +1,27 @@
+{% extends 'Tienda/index.html' %}
+
+{% block titulo %}
+
+{% endblock titulo %}
+
+{% block contenido %}
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Productos</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for pe in pedidos %}
+        <tr>
+            <td>{{ pe.id }}</td>
+            <td>{{ pe.productos }}</td>
+            <td>{{ pe.fecha }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock contenido %}

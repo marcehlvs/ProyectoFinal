@@ -34,7 +34,12 @@ class Pedido(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Pedido {self.id} - {self.fecha}"
+        return f"Pedido {self.id} "
+
+    class Meta:
+        verbose_name = 'Pedido'
+        verbose_name_plural = 'Pedidos'
+
 
 #__ Avatar
 

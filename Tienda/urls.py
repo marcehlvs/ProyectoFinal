@@ -12,6 +12,7 @@ urlpatterns = [
     path('productoCreate/', ProductoCreate.as_view(), name='productoCreate'),
     path('productoUpdate/<int:pk>/', ProductoUpdate.as_view(), name='productoUpdate'),
     path('productoDelete/<int:pk>/', ProductoDelete.as_view(), name='productoDelete'),
+    path('productoDetail/<int:pk>/', ProductoDetail.as_view(), name='productoDetail'),
 
     #___ categorias
 
@@ -43,5 +44,12 @@ urlpatterns = [
 
     #__agregarAvatar
     path('agregar_avatar/', agregarAvatar, name='agregar_avatar'),
+
+    #__pedidos
+
+    path('pedidos/', PedidoList.as_view(), name='pedidos'),
+    path('pedidoCreate/', PedidoCreate.as_view(), name='pedidoCreate'),
+    path('pedidoUpdate/<int:pk>/', PedidoUpdate.as_view(), name='pedidoUpdate'),
+    path('pedidoDelete/<int:pk>/', PedidoDelete.as_view(), name='pedidoDelete'),
 
 ]
