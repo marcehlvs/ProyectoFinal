@@ -15,13 +15,17 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 
+#cambiarPassword
+
+from django.contrib.auth.views import PasswordChangeView
+
+
 
 # Create your views here.
 
 def home(request):
     return render(request, 'Tienda/index.html')
 
-#__ Producto
 
 #__ Importo para ver productos en el index
 class IndexView(ListView):
@@ -29,7 +33,7 @@ class IndexView(ListView):
     template_name = 'Tienda/index.html'
     context_object_name = 'productos'
 
-
+#__ Producto
 class ProductoList(ListView):
     model = Producto
     template_name = 'Tienda/producto_list.html'
@@ -114,3 +118,27 @@ def register(request):
         miForm = RegistroForm()
     return render(request, "Tienda/registro.html", {"form": miForm})
 
+#__Edit profile
+
+@login_required
+def editProfile(request):
+    usuario = request.user
+    if request.method == "POST":
+        miForm = UserEditForm(request.POST)
+        if miForm.is_valid():
+            user = User.objects.get(username=usuario)
+            user.email = miForm.cleaned_data.get("email")
+            user.first_name = miForm.cleaned_data.get("first_name")
+            user.last_name = miForm.cleaned_data.get("last_name")
+            user.save()
+            return redirect(reverse_lazy('home'))
+    else:
+        miForm = UserEditForm(instance=usuario)
+    return render(request, "Tienda/editarPerfil.html", {"form": miForm})
+
+
+#__cambiarClave
+
+class CambiarClave(LoginRequiredMixin, PasswordChangeView):
+	template_name="Tienda/cambiar_clave.html"
+	success_url = reverse_lazy("home")

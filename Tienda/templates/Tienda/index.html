@@ -47,6 +47,9 @@
                 <li style="margin-top: 10px;">
                     <p style="color:green">¡Hola [{{user.username}}]!</p>
                 </li>
+                <li>
+                    <a class="btn btn-success" href="{% url 'perfil' %}" style="margin-left: 10px;">Perfil</a>
+                </li>
                 <li style="margin-left: 10px;">
                     <form method="post" action="{% url 'logout' %}" style="display: inline;">
                         {% csrf_token %}

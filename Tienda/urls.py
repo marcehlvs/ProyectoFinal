@@ -32,4 +32,13 @@ urlpatterns = [
 
     #__ registro
     path('registro/', register, name='registro'),
+
+    #__editProfile
+
+    path('perfil/', editProfile, name="perfil"),
+
+    #__formularioPassword
+
+    path('<int:pk>/password/', CambiarClave.as_view(), name="cambiarClave"),
+
 ]
