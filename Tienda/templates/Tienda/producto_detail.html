@@ -14,12 +14,15 @@
 {% block contenido %}
   <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
     <div style="border: 1px solid #ddd; padding: 20px; background-color: #333; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 600px; text-align: center; color: #fff;">
-
-      <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" style="max-width: 68%; height: auto; margin-bottom: 20px;">
-      <p style="font-size: 18px; color: #ccc; margin-bottom: 20px;">{{ producto.descripcion }}</p>
-      <p style="font-size: 20px; font-weight: bold; color: #007bff; margin-bottom: 10px;">Precio: ${{ producto.precio }}</p>
-      <p style="font-size: 16px; color: #28a745; margin-bottom: 10px;">Cantidad: {{ producto.cantidad }}</p>
-      <p style="font-size: 16px; color: #6c757d;">Categoría: {{ producto.categoria }}</p>
+        <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" style="height: 330px; width: auto; margin-bottom: 20px;">
+        <div style="font-size: 18px; color: #ccc; margin-bottom: 20px; max-height: 100px; overflow-y: auto;">
+            {{ producto.descripcion }}
+        </div>
+        <p style="font-size: 20px; font-weight: bold; color: #007bff; margin-bottom: 10px;">Precio: ${{ producto.precio }}</p>
+        <p style="font-size: 16px; color: #28a745; margin-bottom: 10px;">Cantidad: {{ producto.cantidad }}</p>
+        <p style="font-size: 16px; color: #6c757d;">Categoría: {{ producto.categoria }}</p>
     </div>
-  </div>
+</div>
+
+
 {% endblock contenido %}
